@@ -1,0 +1,30 @@
+{
+  "name": "St3pnyMarket",
+  "short_name": "St3pnyMarket",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#324A80",
+  "theme_color": "#324A80",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/assets/pwa/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/pwa/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/assets/pwa/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

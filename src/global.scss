@@ -1,0 +1,234 @@
+@use '@angular/material' as mat;
+
+@import "@ionic/angular/css/core.css";
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+@import 'leaflet/dist/leaflet.css';
+
+
+/* Colori primary (accent e warning) per angular material 
+html {
+  @include mat.theme((
+    color: (
+      primary: mat.$blue-palette,
+      tertiary: mat.$cyan-palette,
+    ),
+    typography: (
+      bold-weight: 900,
+      medium-weight: 500,
+      regular-weight: 300,
+    ),
+    density: 0,
+  ));
+}
+*/
+
+
+
+// Sfondo ok + dispositivi mobile
+:root {
+  --ion-background-color: transparent;
+  --ion-text-color: #1a1a1a;
+  --header-offset: calc(86px + env(safe-area-inset-top));
+  --header-padding: calc(8px + env(safe-area-inset-top));
+}
+
+// Sfondo
+ion-content::part(background) {
+  background:
+    radial-gradient(circle, rgba(255,255,255,0.10) 2px, transparent 3px) 0 0 / 28px 28px repeat,
+    radial-gradient(circle, rgba(255,255,255,0.06) 1.5px, transparent 2.5px) 14px 14px / 28px 28px repeat,
+    linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+}
+
+ion-content::part(scroll) {
+  background: transparent;
+}
+
+
+// Utile
+.flex{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+// Stili dialog globali
+.transparent-dialog .mat-mdc-dialog-container {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.25), 
+              0 12px 24px rgba(0, 0, 0, 0.15);
+  max-height: 95vh;
+  max-width: 95vw;
+}
+
+.transparent-dialog .mat-mdc-dialog-surface {
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+// Responsiveness per i dialog
+@media (max-width: 768px) {
+  .transparent-dialog .mat-mdc-dialog-container {
+    margin: 16px;
+    max-height: calc(100vh - 32px);
+    max-width: calc(100vw - 32px);
+    border-radius: 16px;
+  }
+  
+  .transparent-dialog .mat-mdc-dialog-surface {
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .transparent-dialog .mat-mdc-dialog-container {
+    margin: 8px;
+    max-height: calc(100vh - 16px);
+    max-width: calc(100vw - 16px);
+    border-radius: 12px;
+  }
+  
+  .transparent-dialog .mat-mdc-dialog-surface {
+    border-radius: 12px;
+  }
+}
+
+// Backdrop migliorato
+.dialog-backdrop {
+  background: rgba(0, 0, 0, 0.6) !important;
+  backdrop-filter: blur(8px);
+}
+
+// Stile snackbar globale
+.mat-mdc-snack-bar-container {
+  --mdc-snackbar-container-color: royalblue;
+  --mdc-snackbar-supporting-text-color: white;
+  --mdc-snackbar-container-shape: 14px;
+  font-size: 1.2rem;
+  padding-bottom: 10px;
+
+  .mdc-button {
+    border-radius: 14px !important;
+    background: deepskyblue !important;
+    color: navy !important;
+    margin-left: 24px;
+    padding: 6px 18px;
+    transition: background 0.1s linear, color 0.1s linear;
+  }
+
+  .mdc-button:hover{
+    color: white !important;
+    background: mediumslateblue !important;
+  }
+
+  .mat-mdc-snack-bar-label{
+    margin: 2px 0 2px 0;
+  }
+
+  .mdc-button__ripple {
+    display: none !important;
+  }
+}
+// Usato nelle snackbar multilinea
+.multi-line{
+  white-space: pre-line;
+}
+
+
+// Tooltip globale
+.mat-mdc-tooltip {
+  background: linear-gradient(135deg, #4b6cb7, #67a0e3) !important;
+  color: white !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  border-radius: 10px !important;
+  box-shadow: 0 4px 16px rgba(76, 108, 183, 0.13) !important;
+  padding: 10px 18px !important;
+  letter-spacing: 0.01em;
+}
+
+
+// Stile di contenitore vuoto condiviso da più pagine
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  width: 80%;
+  text-align: center;
+  color: #4b6cb7;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e0e6f7 100%);
+  border-radius: 24px;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding: 2rem 1rem;
+
+  .empty-icon {
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 150px;
+    animation: pulseIcon 1s infinite;
+    mat-icon {
+      font-size: 100px;
+      color: #4b6cb7;
+      width: 100px;
+      height: 100px;
+      display: block;
+    }
+  }
+  
+  .empty-title {
+    font-size: 1.7rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #4b6cb7;
+    letter-spacing: 0.5px;
+  }
+}
+
+@media (max-width: 600px) {
+  .empty-state {
+    height: 45vh;
+    padding: 1.2rem 0.5rem;
+
+    .empty-icon {
+      padding: 6px;
+      min-width: 48px;
+      min-height: 48px;
+      max-width: 56px;
+      max-height: 56px;
+      mat-icon {
+        font-size: 36px;
+        width: 36px;
+        height: 36px;
+        line-height: 36px;
+      }
+    }
+    .empty-title {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+
+// Effetto icona/logo che pulsa
+@keyframes pulseIcon {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
