@@ -1,0 +1,65 @@
+<app-header
+  *ngIf="!isManager && !isEmbedded"
+  [pageTitle]="'Supermercati'"
+  [showBack]="showBack"
+  [backUrl]="'/dashboard'"
+></app-header>
+
+<ng-container *ngIf="!isEmbedded; else embeddedContent">
+  <ion-content>
+    <ng-container *ngTemplateOutlet="supermarketContent"></ng-container>
+
+    <button
+      *ngIf="!isManager"
+      mat-fab
+      color="primary"
+      class="fab-button"
+      #addSupermarketFabTooltip="matTooltip"
+      matTooltip="Aggiungi supermercato"
+      matTooltipPosition="left"
+      (click)="closeFabTooltip(addSupermarketFabTooltip); apriAddSupermarketDialog()"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+  </ion-content>
+</ng-container>
+
+<ng-template #embeddedContent>
+  <div class="page-container" [class.is-customer-dash]="isCustomerDash">
+    <ng-container *ngTemplateOutlet="supermarketContent"></ng-container>
+  </div>
+</ng-template>
+
+<ng-template #supermarketContent>
+  <div class="page-container" [class.is-customer-dash]="isCustomerDash"> 
+
+    <!-- Lista supermercati -->
+    <div *ngIf="supermarkets.length > 0" class="supermarkets-container" [class.is-customer-dash]="isCustomerDash">
+      <div class="supermarkets-header" *ngIf="!isEmbedded || isManager">
+        <h2 class="supermarkets-title">I tuoi supermercati</h2>
+        <span class="supermarkets-count">
+          {{ supermarkets.length }} supermercat{{ supermarkets.length === 1 ? 'o' : 'i' }}
+        </span>
+      </div>
+      <div class="supermarkets-grid" [class.is-customer-dash]="isCustomerDash">
+        <app-supermarket-card
+          *ngFor="let sm of supermarkets"
+          [supermarket]="sm"
+          (cardClick)="goSupermarket(sm)"
+        ></app-supermarket-card>
+      </div>
+    </div>
+
+    <!-- Quando non c'è nessun supermercato -->
+    <div class="flex">
+      <div *ngIf="supermarkets.length === 0" class="empty-state">
+        <div class="empty-icon">
+          <mat-icon>storefront</mat-icon>
+        </div>
+        <h3 class="empty-title">Nessun supermercato trovato</h3>
+      </div>
+    </div>
+
+
+  </div>
+</ng-template>

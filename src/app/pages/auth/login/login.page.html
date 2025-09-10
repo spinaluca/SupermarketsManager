@@ -1,0 +1,137 @@
+<ion-content>
+  <div class="auth-page">
+
+    <!-- Overlay di loading -->
+    <div *ngIf="loading" class="loading-overlay">
+      <div class="supermarket-loading">
+        <img src="assets/icons/cart-loading.png" alt="Caricamento..." class="cart-loading-img" />
+        <div class="loading-text">Attendere...</div>
+      </div>
+    </div>
+
+    <div class="auth-container">
+
+      <img src="assets/logo.png" alt="Logo St3pnyMarket" class="logo" (click)="onLogoClick()"/>
+      <button class="logo-hidden-button" (click)="onLogoClick()" tabindex="-1" aria-hidden="true"></button>
+
+      <h1 class="title">Accedi</h1>
+
+      <div *ngIf="errorMessage" class="auth-error">
+        {{ errorMessage }}
+      </div>
+
+      <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+        <ion-item lines="full" class="custom-floating-item">
+          <label
+            class="custom-floating-label"
+            [class.floating]="usernameFocused || username.length > 0"
+            for="usernameInput"
+          >Username</label>
+          <ion-input
+            id="usernameInput"
+            name="username"
+            type="text"
+            required
+            [(ngModel)]="username"
+            (ionFocus)="usernameFocused = true"
+            (ionBlur)="usernameFocused = false"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item lines="full" class="custom-floating-item">
+          <label
+            class="custom-floating-label"
+            [class.floating]="passwordFocused || password.length > 0"
+            for="passwordInput"
+          >Password</label>
+          <ion-input
+            id="passwordInput"
+            name="password"
+            [type]="showPassword ? 'text' : 'password'"
+            [(ngModel)]="password"
+            (ionFocus)="passwordFocused = true"
+            (ionBlur)="passwordFocused = false"
+          ></ion-input> <!-- required -->
+          <ion-icon 
+            [name]="showPassword ? 'eye-off' : 'eye'" 
+            slot="end" 
+            (click)="togglePassword()"
+            class="password-toggle"
+          ></ion-icon>
+        </ion-item>
+
+        <ion-button
+          expand="block"
+          shape="round"
+          color="primary"
+          type="submit"
+          [disabled]="!loginForm.valid">
+          Accedi
+        </ion-button>
+      </form>
+
+      <div class="auth-link">
+        <span>Non hai un account?</span><a routerLink="/auth/registrazione">Registrati</a>
+      </div>
+    </div>
+
+    <ion-modal *ngIf="showApiModal" [isOpen]="showApiModal" (ionModalDidDismiss)="closeApiModal()" [backdropDismiss]="true" [breakpoints]="[0, 1]" [initialBreakpoint]="1">
+      <ng-template>
+        <div class="api-modal-content">
+          <h2>Configura API</h2>
+          <label>Indirizzo:</label>
+          <div class="api-input-row">
+            <select class="native-select api-schema-select" [(ngModel)]="apiSchema">
+              <option value="https">https</option>
+              <option value="http">http</option>
+            </select>
+            <input class="api-url-input" [(ngModel)]="apiUrl" placeholder="es. 192.168.1.100" />
+          </div>
+          <label>Porta:</label>
+          <select class="native-select" [(ngModel)]="apiPort">
+            <option value="default">Predefinita</option>
+            <option value="5000">5000</option>
+            <option value="5001">5001</option>
+            <option value="personalizzata">Personalizzata</option>
+          </select>
+          <input *ngIf="apiPort === 'personalizzata'" [(ngModel)]="customPort" placeholder="Inserisci porta" type="number" />
+          <!-- Pulsante server cloud su riga separata -->
+          <div class="cloud-api-btn-row">
+            <button ion-button color="secondary" (click)="useLocalApiUrl()" class="cloud-api-btn">Usa server locale</button>
+          </div>
+          <div class="api-modal-buttons">
+            <button ion-button color="primary" (click)="saveApiUrl()">Salva</button>
+            <button ion-button color="danger" (click)="resetApiUrl()">Reset</button>
+            <button ion-button (click)="closeApiModal()">Annulla</button>
+          </div>
+        </div>
+      </ng-template>
+    </ion-modal>
+
+    <!-- Modale per iOS -->
+    <ion-modal *ngIf="showIOSModal" [isOpen]="showIOSModal" (ionModalDidDismiss)="closeIOSModal()" [backdropDismiss]="true" [breakpoints]="[0, 1]" [initialBreakpoint]="1">
+      <ng-template>
+        <div class="api-modal-content">
+          <h2>🚀 Installa St3pnyMarket</h2>
+          <div class="ios-modal-content-wrapper">
+            <img src="assets/logo.png" alt="Logo St3pnyMarket" class="ios-modal-logo"/>
+            <p class="ios-modal-text">
+              Installa l'app per un accesso rapido e un'esperienza ottimizzata!
+            </p>
+          </div>
+          <div class="ios-modal-instructions">
+            <div class="ios-modal-steps">
+              <li><span>Tocca il pulsante <ion-icon name="share-outline" class="ios-modal-icon"></ion-icon> <strong>Condividi</strong> in basso...</span></li>
+              <li><span>Scorri verso il basso e seleziona <strong>Aggiungi alla schermata Home</strong>...</span></li>
+              <li><span>Tocca <strong>Aggiungi</strong> per completare l'installazione!!</span></li>
+            </div>
+          </div>
+          <div class="api-modal-buttons">
+            <button ion-button color="primary" (click)="closeIOSModal()">✅ Ho capito!</button>
+          </div>
+        </div>
+      </ng-template>
+    </ion-modal>
+
+  </div>
+</ion-content>

@@ -1,0 +1,129 @@
+.page-container {
+  padding: 0;
+  min-height: calc(100vh - 56px);
+  position: relative;
+  padding-bottom: clamp(2rem, 5vh, 4rem);
+}
+
+.supermarkets-container {
+  padding: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.95);
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(76, 108, 183, 0.10);
+  margin-top: 2rem;
+  margin-bottom: clamp(4rem, 10vh, 8rem);
+  @media (max-width: 1200px) {
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
+  }
+  @media (max-width: 768px) {
+    padding: 1rem;
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
+    margin-bottom: clamp(3rem, 8vh, 6rem);
+  }
+  @media (max-width: 480px) {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    margin-bottom: clamp(2.5rem, 6vh, 5rem);
+  }
+}
+
+.supermarkets-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e0e6f7;
+}
+
+.supermarkets-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  background: #4b6cb7;
+  margin: 0;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.supermarkets-count {
+  background: linear-gradient(135deg, #4b6cb7, #67a0e3);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(76, 108, 183, 0.18);
+}
+
+.supermarkets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+app-supermarket-card{
+  cursor: pointer;
+}
+
+.fab-button {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 72px !important;
+  height: 72px !important;
+  border-radius: 36px !important;
+  box-shadow: 0 6px 24px rgba(76, 108, 183, 0.18) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
+  background: linear-gradient(135deg, #4b6cb7, #67a0e3);
+  color: white;
+
+  mat-icon {
+    font-size: 32px !important;
+    width: 32px !important;
+    height: 32px !important;
+    transition: transform 0.3s ease;
+  }
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(76, 108, 183, 0.25) !important;
+    mat-icon {
+      transform: scale(1.1);
+    }
+  }
+}
+
+
+// Stile del componente quando è embedded nella
+// Customer Dashboard
+.page-container.is-customer-dash{
+  padding-bottom: 0 !important;
+}
+.supermarkets-container.is-customer-dash{
+  background: none;
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.supermarkets-grid.is-customer-dash{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  width: 100%;
+  padding-top: 8px;
+}
+
+

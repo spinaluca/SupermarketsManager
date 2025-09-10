@@ -1,0 +1,11 @@
+<ion-content>
+
+  <div class="admin-dashboard-content">
+    <div class="dashboard-cards-wrapper">
+      <app-admin-dash-card icon="storefront" iconColor="blu" title="Supermercati" [value]="stats?.supermarket_count ?? 0" label="Supermercati totali" (click)="goSupermercati()"></app-admin-dash-card>
+      <app-admin-dash-card icon="inventory_2" iconColor="arancione" title="Prodotti" [value]="stats?.product_count ?? 0" label="Prodotti totali" (click)="goProdotti()"></app-admin-dash-card>
+      <app-admin-dash-card icon="people" iconColor="rosso" title="Utenti" [value]="stats?.user_count ?? 0" label="Utenti totali" (click)="goUtenti()"></app-admin-dash-card>
+    </div>
+  </div>
+  
+</ion-content>

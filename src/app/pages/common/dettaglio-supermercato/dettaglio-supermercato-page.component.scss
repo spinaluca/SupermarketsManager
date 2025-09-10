@@ -1,0 +1,242 @@
+.header-icon {
+  color: #2196f3;
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+}
+
+.detail-wrapper {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin: 0 auto;
+  width: 65%;
+
+  @media (max-width: 1400px) {
+    width: 95%;
+  }
+
+  @media (max-width: 900px) {
+    width: 100%;
+    padding: 12px;
+  }
+}
+
+.products-box {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(227, 242, 253, 0.9) 100%);
+  border-radius: 16px;
+  margin: 0 0 24px 0;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+::ng-deep .mat-mdc-select-panel {
+  background: white !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+::ng-deep .mat-mdc-select-panel .mat-mdc-option {
+  font-size: 1.18rem;
+}
+
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(480px, 1fr)); // massimo 3 per riga
+  gap: 16px;
+  padding: 4px;
+}
+
+@media (max-width: 900px) {
+  .cards-container {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 8px;
+    padding: 2px;
+  }
+}
+
+
+.all-offers-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e8f5e9;
+  border-radius: 12px;
+  padding: 18px 12px;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+
+.fab-button {
+  position: fixed;
+  width: 72px !important;
+  height: 72px !important;
+  border-radius: 36px !important;
+  box-shadow: 0 6px 24px rgba(76, 108, 183, 0.18) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
+  color: white;
+  right: 2rem;
+  
+  mat-icon {
+    font-size: 32px !important;
+    width: 32px !important;
+    height: 32px !important;
+    transition: transform 0.3s ease;
+  }
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(76, 108, 183, 0.25) !important;
+    
+    mat-icon {
+      transform: scale(1.1);
+    }
+  }
+}
+
+
+.add-products-fab {
+  bottom: 7.1rem;
+  background: linear-gradient(135deg, #4b6cb7, #67a0e3);
+}
+
+
+.generate-offers-fab {
+  bottom: 2rem;
+  background: linear-gradient(135deg, #ff9800, #ff5722);
+}
+
+.search-section {
+  margin: 12px 0;
+}
+
+.search-filter-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 12px 0;
+}
+
+.search-input {
+  width: 360px;
+  max-width: 100%;
+  padding: 0 16px;
+  border: 1.5px solid #ccc;
+  border-radius: 10px;
+  font-size: 1.3rem;
+  background: white;
+  flex: 1 1 48px;
+  height: 48px;
+}
+
+::ng-deep .category-filter-field {
+  max-width: 210px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  margin-top: 0;
+  height: 48px;
+
+  .mat-mdc-form-field-flex {
+    border: 1.5px solid #ccc;
+    border-radius: 10px;
+    font-size: 1.18rem;
+    height: 48px;
+    background: white;
+    align-items: center;
+    padding: 8px;
+    align-content: center;
+  }
+  
+  .mat-mdc-select[ng-reflect-model=""]{
+    color: #888 !important;
+    opacity: 1 !important;
+  }
+
+  .mdc-notched-outline__leading,
+  .mdc-notched-outline__notch,
+  .mdc-notched-outline__trailing{
+    border: none;
+  }
+  
+}
+
+
+
+@media (max-width: 600px) {
+  .search-filter-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .search-input {
+    width: 100%;
+    min-width: 0;
+    font-size: 1.1rem;
+    height: 44px;
+  }
+  .category-filter-field {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    height: 44px;
+  }
+  ::ng-deep .category-filter-field .mat-mdc-form-field-flex {
+    font-size: 1.05rem;
+    height: 44px;
+  }
+}
+
+.offers-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.section-title {
+  margin-bottom: 18px;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.no-margin-top {
+  margin-top: 0;
+}
+
+.no-products-found {
+  text-align: center;
+  color: #666;
+  margin-top: 1rem;
+}
+
+.all-offers-icon {
+  font-size: 2.5rem;
+  vertical-align: middle;
+  color: #43a047;
+}
+
+.all-offers-text {
+  font-size: 1.3rem;
+  margin-left: 0.5rem;
+  color: #43a047;
+  font-weight: 500;
+}
+
+
+
+.modern-divider {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+  
+  margin: 24px 0;
+  border-top-width: 2px !important;
+  opacity: 0.3;
+}

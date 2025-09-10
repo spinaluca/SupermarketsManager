@@ -1,0 +1,108 @@
+<div class="dialog-content">
+  <!-- Header del dialog -->
+  <div class="dialog-header">
+    <div class="header-icon">
+      <mat-icon>{{ icon }}</mat-icon>
+    </div>
+    <div class="header-text">
+      <h2 class="dialog-title">
+        {{ title }}
+      </h2>
+      <p class="dialog-subtitle">
+        {{ subtitle }}
+      </p>
+    </div>
+  </div>
+
+  <!-- Form -->
+  <div class="dialog-body" #dialogBody>
+    
+    <form [formGroup]="form" class="product-form">
+      <div class="form-section">
+        <ng-container *ngFor="let field of fields">
+          <!-- Campo testo -->
+          <mat-form-field *ngIf="field.type === 'text'" appearance="fill" color="primary" class="full-width">
+            <mat-label>{{ field.label }}</mat-label>
+            <input matInput [placeholder]="field.placeholder" [formControlName]="field.name" [type]="field.name === 'barcode' ? 'tel' : 'text'" 
+              (input)="field.name === 'barcode' ? filterBarcode($event) : null" />
+            <mat-icon matSuffix>{{ field.icon }}</mat-icon>
+            <mat-error *ngIf="form.get(field.name)?.invalid && (form.get(field.name)?.touched || form.touched)">
+              {{ field.errorMsg }}
+            </mat-error>
+          </mat-form-field>
+
+          <!-- Campo textarea -->
+          <mat-form-field *ngIf="field.type === 'textarea'" appearance="fill" color="primary" class="full-width">
+            <mat-label>{{ field.label }}</mat-label>
+            <textarea matInput [placeholder]="field.placeholder" [formControlName]="field.name" rows="3"></textarea>
+            <mat-icon matSuffix>{{ field.icon }}</mat-icon>
+            <mat-error *ngIf="form.get(field.name)?.invalid && (form.get(field.name)?.touched || form.touched)">
+              {{ field.errorMsg }}
+            </mat-error>
+          </mat-form-field>
+
+          <!-- Campo select manager -->
+          <mat-form-field *ngIf="field.type === 'select' && field.name === 'managerName'" appearance="fill" color="primary" class="full-width">
+            <mat-label>{{ field.label }}</mat-label>
+            <mat-select [formControlName]="field.name">
+              <mat-option *ngFor="let m of managers" [value]="m.id">{{ m.username }}</mat-option>
+            </mat-select>
+            <mat-icon matSuffix>{{ field.icon }}</mat-icon>
+            <mat-error *ngIf="form.get(field.name)?.invalid && (form.get(field.name)?.touched || form.touched)">
+              {{ field.errorMsg }}
+            </mat-error>
+          </mat-form-field>
+
+          <!-- Campo indirizzo con autocomplete -->
+          <mat-form-field *ngIf="field.type === 'autocomplete' && field.name === 'address'" appearance="fill" color="primary" class="full-width">
+            <mat-label>{{ field.label }}</mat-label>
+            <input matInput [placeholder]="field.placeholder" [formControlName]="field.name"
+              [matAutocomplete]="auto"
+              (blur)="gestisciAddressSuggestions(form.get(field.name)?.value)"
+              (keyup.enter)="gestisciAddressSuggestions(form.get(field.name)?.value)" />
+            <mat-icon matSuffix>{{ field.icon }}</mat-icon>
+            <mat-error *ngIf="form.get(field.name)?.invalid && (form.get(field.name)?.touched || form.touched)">
+              {{ field.errorMsg }}
+            </mat-error>
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelectAddress($event)">
+              <mat-option *ngFor="let suggestion of addressSuggestions" [value]="suggestion.display_name">
+                {{ suggestion.display_name }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+
+          <!-- Campo categoria autocomplete/manuale -->
+          <mat-form-field *ngIf="field.type === 'category-autocomplete'" appearance="fill" color="primary" class="full-width">
+            <mat-label>{{ field.label }}</mat-label>
+            <input matInput [placeholder]="field.placeholder" [formControlName]="field.name"
+                   [matAutocomplete]="autoCategory"
+                   (input)="filterCategory($event)"
+                   autocomplete="off" />
+            <mat-icon matSuffix>{{ field.icon }}</mat-icon>
+            <mat-error *ngIf="form.get(field.name)?.invalid && (form.get(field.name)?.touched || form.touched)">
+              {{ field.errorMsg }}
+              <span *ngIf="form.get(field.name)?.errors?.['onlyLetters']"> (Solo lettere e spazi)</span>
+            </mat-error>
+            <mat-autocomplete #autoCategory="matAutocomplete">
+              <mat-option *ngFor="let option of filteredCategoryOptions" [value]="option">
+                {{ option }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </ng-container>
+      </div>
+    </form>
+  </div>
+
+  <!-- Bottoni -->
+  <mat-dialog-actions class="dialog-actions">
+    <button mat-button (click)="cancel()" class="cancel-btn">
+      <mat-icon>close</mat-icon>
+      Annulla
+    </button>
+    <button mat-raised-button (click)="save()" [disabled]="form.invalid" class="save-btn">
+      <mat-icon>save</mat-icon>
+      {{ saveLabel }}
+    </button>
+  </mat-dialog-actions>
+</div> 

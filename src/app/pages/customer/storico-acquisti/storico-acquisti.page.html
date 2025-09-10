@@ -1,0 +1,35 @@
+<app-header 
+  [pageTitle]="'Storico Acquisti'" 
+  [showBack]="true" 
+  [backUrl]="'/dashboard'">
+</app-header>
+
+<ion-content>
+  <div class="storico-container">
+    <h2>Storico Acquisti</h2>
+    <ng-container>
+      <div *ngIf="acquisti.length === 0">
+        <p>Nessun acquisto effettuato.</p>
+      </div>
+      <div class="storico-scrollable">
+        <div *ngFor="let group of groupedAcquisti" class="purchase-group">
+          <div class="group-header">
+            <span>{{ group.date | date:'short' }} - {{ group.supermarket }}</span>
+            <span class="group-total">Totale: {{ group.total | currency:'EUR' }}</span>
+          </div>
+
+          <ul class="acquisti-list">
+            <li *ngFor="let acquisto of group.acquisti" class="acquisto-item">
+              <div class="item-main">   
+                <span class="prod-name">{{ acquisto.product_name }}</span>
+                <span class="qty">x{{ acquisto.quantity }}</span>
+                <span class="item-total">{{ acquisto.total_price | currency:'EUR' }}</span>
+
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</ion-content> 

@@ -1,0 +1,221 @@
+@use '@angular/material' as mat;
+$primary-bg: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+
+.main-header {
+  background: $primary-bg;
+  color: white;
+  height: var(--header-offset);
+  padding-top: var(--header-padding);
+  padding-bottom: 8px;
+  display: flex;
+  align-items: center;
+
+  .app-title {
+    font-weight: 700; 
+    font-size: 1.25rem;
+    opacity: 1 !important;
+    margin-left: 0 !important;
+    max-width: 60vw;
+  }
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: auto; // A destra
+  }
+
+  .header-logo {
+    height: 72px;
+    margin-right: 16px;
+    vertical-align: middle;
+    display: inline-block;
+  }
+}
+
+.menu-btn, .logout-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 48px;
+  height: 48px;
+  font-size: 1.25rem;
+
+  border: 1px solid lightsteelblue;
+  border-radius: 10px;
+
+  color:white;
+  background-color: #4b6cb7;
+  transition: all .2s ease;
+  mat-icon {
+    transition: color .2s;
+  }
+}
+
+.menu-btn[aria-expanded="true"] {
+    background: lightsteelblue;
+    color: navy;
+    border-color: lightsteelblue;
+    transform: scale(1.1);
+  }
+
+button[mat-icon-button] {
+  color: white;
+}
+
+.logout-btn:hover{
+    background: lightcoral;
+    color: maroon;
+    border-color: lightcoral;
+    transform: scale(1.1);
+}
+
+// Stile menu
+::ng-deep .mat-mdc-menu-content{
+  padding: 8px 0 0 0 !important;
+  background-color: transparent !important;
+
+  .user-info {
+    border-radius: 8px 8px 0 0;
+    background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+
+    p{
+      margin: 2px;
+    }
+
+    .user{
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    .ruolo{
+      font-size: 1rem;
+    }
+  }
+
+  .containerMenu {
+    background-color: white;
+    border-radius: 0 0 8px 8px;
+    padding: 12px;
+  }
+
+  .mat-mdc-menu-item {
+    border-radius: 8px;
+    padding: 12px;
+    transition: background 0.18s, color 0.18s;
+    font-size: 1rem;
+    color: #182848;
+    font-weight: bold;
+  }
+
+  .mat-mdc-menu-item:hover{
+    background: #e3e8f0 !important;
+    color: #4b6cb7 !important;
+  }
+
+  .mat-mdc-menu-item mat-icon {
+    margin-right: 12px;
+    color: #4b6cb7;
+    font-size: 1.3em;
+  }
+}
+
+.clickable-logo {
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.clickable-logo:hover {
+  transform: scale(1.15);
+}
+
+@media (max-width: 900px) {
+  .main-header {
+    .app-title {
+      font-size: 1rem;
+      max-width: 70vw;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-left: 0 !important;
+      opacity: 1 !important;
+    }
+    .header-logo {
+      height: 48px;
+      margin-right: 10px;
+    }
+    .header-actions {
+      gap: 8px;
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .main-header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 44px;
+    .app-title {
+      font-size: 0.9rem;
+      max-width: 80vw;
+      margin-left: 0;
+    }
+    .header-logo {
+      height: 64px;
+      margin-right: 6px;
+    }
+    .header-actions {
+      .logout-btn, .menu-btn {
+        min-width: 36px;
+        min-height: 36px;
+        font-size: 0.98rem;
+        padding: 0 0.3rem;
+      }
+    }
+    .back-btn {
+      min-width: 36px;
+      min-height: 36px;
+      margin-right: 2px;
+    }
+    .spacer {
+      flex: 0 0 8px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .main-header {
+    min-height: 36px;
+    .app-title {
+      margin-left: 0;
+      font-size: 0.7rem;
+      max-width: 90vw;
+    }
+    .header-logo {
+      height: 48px;
+      margin-right: 4px;
+    }
+    .header-actions {
+      .logout-btn, .menu-btn {
+        min-width: 28px;
+        min-height: 28px;
+        font-size: 0.85rem;
+        padding: 0 0.1rem;
+      }
+    }
+    .back-btn {
+      min-width: 28px;
+      min-height: 28px;
+      margin-right: 1px;
+    }
+  }
+}

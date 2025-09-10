@@ -1,0 +1,65 @@
+<div class="product-card">
+
+  <div class="product-header">
+
+    <div class="product-icon">
+      <mat-icon>inventory_2</mat-icon>
+    </div>
+
+    <div class="product-status">
+      <span class="status-badge" *ngIf="quantity !== 0">Disponibile</span>
+      <span class="status-badge not-available" *ngIf="quantity === 0">Non disponibile</span>
+      <span *ngIf="hasDiscount" class="offer-badge">In offerta</span>
+    </div>
+
+  </div>
+  
+
+  <div class="product-content">
+
+    <h3 class="product-name">{{ offer?.product_name || product?.name }}</h3>
+
+    <div *ngIf="showSupermarketName && supermarketName" class="supermarket-name">
+      <mat-icon class="supermarket-icon">store</mat-icon>
+      <span class="supermarket-name-text">{{ supermarketName }}</span>
+    </div>
+
+    <p class="product-description">{{ offer?.product_description || product?.description }}</p>
+    
+    <div *ngIf="showQuantity && quantity !== undefined" class="product-quantity">
+      <mat-icon>inventory</mat-icon>
+      <p>Quantità: <strong>{{ quantity }}</strong></p>
+    </div>
+    
+    <div class="product-meta">
+      <span class="product-category">
+        <mat-icon>category</mat-icon>
+        {{ offer?.product_category || product?.category }}
+      </span>
+    </div>
+    
+
+    <div *ngIf="showPrice" class="prices">
+
+      <!-- Mostra il prezzo originale solo se è in offerta -->
+      <span *ngIf="hasDiscount" class="original-price">{{ offer?.original_price | currency:'EUR':'symbol' }}</span>
+
+      <!-- Se c'è un'offerta mostra il prezzo scontato e applica una classe particolare, altrimenti mostra il prezzo normale -->
+      <span class="text-price">{{ displayPrice | currency:'EUR':'symbol' }}</span>
+      <span *ngIf="hasDiscount" class="discount">-{{ this.offer?.discount_percent }}%</span>
+
+    </div>
+    
+    <div *ngIf="hasDiscount" class="validity">
+      <mat-icon>schedule</mat-icon>
+      Offerta valida fino al: {{ offer?.end_date | date:'dd/MM/yyyy':'':'it-IT' }}
+    </div>
+   
+    <button *ngIf="showAddToCart" mat-stroked-button color="primary" class="cart-btn" (click)="addToCart(product)" [disabled]="quantity === 0">
+      <span class="cart-symbol">+</span> Aggiungi al carrello
+    </button>
+
+
+  </div>
+
+</div>

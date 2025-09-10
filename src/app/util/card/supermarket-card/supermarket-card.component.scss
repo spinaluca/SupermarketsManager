@@ -1,0 +1,155 @@
+.supermarket-list-item {
+  padding: 16px;
+  border-radius: 18px;
+  background: white;
+  width: 100%;
+  transition: transform 0.2s;
+  
+  &:hover {
+    transform: translateY(-4px);
+  }
+
+  &.big {
+    padding: 32px 32px 24px 32px;
+    font-size: 1.15rem;
+  }
+}
+
+.supermarket-info-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  
+  .supermarket-list-item.big & {
+    gap: 32px;
+    margin-bottom: 16px;
+  }
+}
+
+.sm-list-icon {
+  font-size: 32px;
+  width: 46px;
+  height: 46px;
+  color: #1976d2;
+  background: #e3f2fd;
+  border-radius: 40%;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  .supermarket-list-item.big & {
+    font-size: 64px;
+    width: 78px;
+    height: 78px;
+  }
+}
+
+.sm-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 4px;
+  
+  .supermarket-list-item.big & {
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+}
+
+.sm-address {
+  font-size: 0.95rem;
+  color: #666;
+  
+  .supermarket-list-item.big & {
+    font-size: 1.1rem;
+  }
+}
+
+.sm-coords {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #4b6cb7;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+
+
+  .coords-icon {
+    color: #67a0e3;
+    padding-right: 24px;
+  }
+  
+  .supermarket-list-item.big & {
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+  }
+}
+
+.mini-map-wrapper {
+  width: 100%;
+  height: 140px;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  
+  .supermarket-list-item.big & {
+    height: 300px;
+  }
+}
+
+@media (max-width: 900px) {
+  .supermarket-list-item {
+    min-height: 160px;
+    padding: 12px;
+    
+    &.big {
+      max-width: 98vw;
+      padding: 16px 8px 12px 8px;
+    }
+  }
+
+  .supermarket-info-row {
+    gap: 12px;
+    align-items: center;
+  }
+
+  .sm-list-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+    padding: 6px;
+  }
+
+  .sm-title {
+    font-size: 1rem;
+    
+    .supermarket-list-item.big & {
+      font-size: 1.2rem;
+    }
+  }
+
+  .sm-address {
+    font-size: 0.9rem;
+    margin-bottom: 0;
+  }
+
+  .sm-coords {
+    font-size: 0.8rem;
+    padding-left: 0;
+    
+    .supermarket-list-item.big & {
+      padding-left: 0;
+    }
+  }
+
+  .mini-map-wrapper {
+    height: 120px;
+    
+    .supermarket-list-item.big & {
+      height: 120px;
+    }
+  }
+}

@@ -1,0 +1,26 @@
+.mini-map-wrapper-relative {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.mini-map {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 2 / 1;
+  border-radius: 10px;
+}
+
+@media (max-width: 900px) {
+  .mini-map { aspect-ratio: 3 / 2; }
+}
+
+// Overlay per ricevere il click
+.mini-map-overlay {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  background: transparent;
+  z-index: 1000;
+}

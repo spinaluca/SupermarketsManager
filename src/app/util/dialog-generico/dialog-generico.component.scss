@@ -1,0 +1,310 @@
+// Permette al dialog di adattarsi a maxHeight: 80vh senza bug
+.dialog-content {
+  /* background: white;  Tolto perché dava un bordino bianco */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  max-height: 80vh;
+  overflow: hidden;
+}
+
+// Forza il contenuto a scrollare se supera l'altezza
+.dialog-body {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 24px 24px !important;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  max-height: calc(85vh - 120px); /* lascia spazio per header e footer */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+  scroll-behavior: auto;
+  background: white;
+}
+.dialog-body::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Webkit */
+}
+
+.dialog-header {
+  background: linear-gradient(135deg, blue, navy);
+  color: white;
+  padding: 1.5rem 0 1.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.dialog-header .header-icon {
+  width: 56px;
+  height: 56px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 30px;
+  font-size: 28px;
+}
+
+.dialog-header .dialog-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+.dialog-header .dialog-subtitle {
+  font-size: 1rem;
+}
+
+mat-label {
+  margin-left: 10px;
+  margin-bottom: 10px;
+  color: black;
+}
+
+.full-width {
+  width: 100%;
+  height: 100%;
+
+  ::ng-deep .mat-mdc-text-field-wrapper {
+    border-radius: 12px;
+    background: whitesmoke;
+    padding: 4px 12px;
+  }
+  
+  input, textarea {
+    font-size: 1rem;
+    padding: 12px;
+    color: black !important;
+  }
+  
+  mat-icon {
+    color: black;
+    font-size: 20px;
+  }
+  
+  ::ng-deep .mat-mdc-select-value-text {
+    color: black !important;
+  }
+  
+  ::ng-deep .mat-mdc-form-field-error-wrapper {
+    overflow: hidden;
+    font-size: 0.8rem;
+    color: red;
+    padding: 8px 0 16px;
+    margin-bottom: 12px;
+  }
+  
+  ::ng-deep .mat-mdc-form-field-subscript-wrapper:empty {
+    display: none;
+  }
+}
+
+/* Footer */
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 1.5rem 2rem;
+  border-top: 1px solid gainsboro;
+  background: whitesmoke;
+}
+
+.dialog-body{
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 24px 24px !important;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+  scroll-behavior: auto;
+  background: white;
+}
+.dialog-body::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Webkit */
+}
+
+
+.cancel-btn,
+.save-btn {
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 2rem;
+  font-weight: 600;
+  min-width: 140px;
+}
+
+.cancel-btn {
+  background: transparent;
+  box-shadow: 0 4px 16px rgba(0,0,255,0.25);
+  transition: all 0.2s;
+  
+  &:hover { 
+    background: gainsboro;
+    box-shadow: 0 6px 20px rgba(0,0,255,0.3);
+    color: blue;
+  }
+}
+
+.save-btn {
+  box-shadow: 0 4px 16px rgba(0,0,255,0.25);
+  transition: all 0.2s;
+  
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,255,0.3);
+  }
+  
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+}
+
+.form-section{
+  padding-top: 16px;
+}
+
+.form-section mat-form-field {
+  margin-bottom: 28px;
+}
+
+.form-section mat-form-field:last-child {
+  margin-bottom: 18px;
+}
+
+::ng-deep .dialog-backdrop {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+// Responsiveness migliorata
+@media (max-width: 768px) {
+  .dialog-header {
+    padding: 1rem 0 1rem 0;
+    gap: 1rem;
+    
+    .header-icon {
+      width: 48px;
+      height: 48px;
+      margin-left: 20px;
+      font-size: 24px;
+    }
+    
+    .dialog-title {
+      font-size: 1.5rem;
+    }
+    
+    .dialog-subtitle {
+      font-size: 0.9rem;
+    }
+  }
+  
+  .dialog-body {
+    padding: 16px 16px !important;
+  }
+  
+  .dialog-actions {
+    padding: 1rem 1.5rem;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    
+    .cancel-btn,
+    .save-btn {
+      width: 100%;
+      min-width: unset;
+      justify-content: center;
+    }
+  }
+  
+  .form-section mat-form-field {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dialog-header {
+    padding: 0.75rem 0 0.75rem 0;
+    gap: 0.75rem;
+    
+    .header-icon {
+      width: 40px;
+      height: 40px;
+      margin-left: 16px;
+      font-size: 20px;
+      border-radius: 10px;
+    }
+    
+    .dialog-title {
+      font-size: 1.25rem;
+    }
+    
+    .dialog-subtitle {
+      font-size: 0.85rem;
+    }
+  }
+  
+  .dialog-body {
+    padding: 12px 12px !important;
+  }
+  
+  .dialog-actions {
+    padding: 0.75rem 1rem;
+  }
+  
+  .cancel-btn,
+  .save-btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .full-width {
+    ::ng-deep .mat-mdc-text-field-wrapper {
+      padding: 2px 8px;
+    }
+    
+    input, textarea {
+      padding: 8px;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .dialog-actions {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+  .cancel-btn,
+  .save-btn {
+    width: 90%;
+    min-width: unset;
+    justify-content: center;
+  }
+}
+
+::ng-deep .mat-mdc-select-panel, ::ng-deep.mat-mdc-autocomplete-panel  {
+  background: white !important;
+}
+
+::ng-deep .mat-mdc-option:hover, ::ng-deep .mat-option:hover {
+  background: #e3f0fd;
+  color: #1976d2;
+}
+
+::ng-deep .mat-mdc-dialog-surface{
+  background-color: transparent;
+}
+
+/* Barra in basso in ogni campo */
+::ng-deep .mat-mdc-text-field-wrapper{
+  color: rgb(0,0,192);
+}

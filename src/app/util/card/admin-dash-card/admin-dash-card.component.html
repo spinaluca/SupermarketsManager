@@ -1,0 +1,9 @@
+<mat-card class="stat-card mat-elevation-z3" [ngClass]="iconColor + '-card'">
+  <div class="card-content">
+    <mat-icon class="stat-icon" [color]="iconColor">{{ icon }}</mat-icon>
+    <div class="stat-text">
+      <span class="stat-title mat-typography mat-title-medium">{{ title }}</span>
+      <span class="stat-number mat-typography mat-display-medium">{{ value }}</span>
+    </div>
+  </div>
+</mat-card> 

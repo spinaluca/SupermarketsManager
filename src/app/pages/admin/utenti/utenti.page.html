@@ -1,0 +1,30 @@
+<app-header [pageTitle]="'Utenti'" [showBack]="true" [backUrl]="'/dashboard'"></app-header>
+
+<ion-content>
+  
+  <div class="content-wrapper">
+
+    <!-- Lista utenti -->
+    <mat-list *ngIf="utenti.length > 0" class="users-list">
+
+      <mat-list-item *ngFor="let u of utenti">
+        <mat-icon matListItemIcon>person</mat-icon>
+        <div matListItemTitle>{{ u.username }}</div>
+        <div matListItemLine>{{ u.email || 'N/A' }} — {{ u.role }}</div>
+      </mat-list-item>
+
+    </mat-list>
+
+    <!-- Quando non c'è nessun utente -->
+    <div class="flex">
+      <div *ngIf="utenti.length === 0" class="empty-state">
+        <div class="empty-icon">
+          <mat-icon>person</mat-icon>
+        </div>
+        <h3 class="empty-title">Nessun utente trovato</h3>
+      </div>
+    </div>
+
+  </div>
+
+</ion-content> 

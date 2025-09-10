@@ -1,0 +1,111 @@
+<app-header
+  [pageTitle]="'Dettaglio Supermercato'"
+  [showBack]="true"
+  [backUrl]="backUrl"
+></app-header>
+
+<ion-content>
+
+  <!-- Anteprima carrelloper il customer -->
+  <app-cart-preview *ngIf="showCartPreview" (close)="closeCartPreview()"></app-cart-preview>
+
+
+  <div class="detail-wrapper" *ngIf="supermarket as sm">
+
+    <app-supermarket-card [supermarket]="sm" [big]="true"></app-supermarket-card>
+
+    <!-- Box dei prodotti -->
+    <mat-card class="products-box">
+      <!-- Barra di ricerca e filtro per categoria-->
+      <div class="search-filter-row">
+        <input type="text" [(ngModel)]="searchTerm" (input)="filterProdotti()" placeholder="Cerca prodotto..." class="search-input">
+        <mat-form-field appearance="outline" class="category-filter-field">
+          <mat-select [(ngModel)]="selectedCategory" (selectionChange)="filterProdotti()">
+            <mat-option value="">Categoria...</mat-option>
+            <mat-option *ngFor="let category of availableCategories" [value]="category">
+              {{ category }}
+            </mat-option>
+          </mat-select>
+          <mat-icon matSuffix>category</mat-icon>
+        </mat-form-field>
+      </div>
+      <mat-divider class="modern-divider"></mat-divider>
+
+
+      <!-- Sezione prodotti in offerta -->
+      <h2 class="section-title no-margin-top">Offerte attive:</h2>
+      <div class="cards-container" *ngIf="filteredProductsWithOffer.length > 0">
+        <app-product-card 
+          *ngFor="let p of filteredProductsWithOffer"
+          [product]="p"
+          [offer]="p.offer"
+          [showAddToCart]="isCustomer"
+          [showPrice]="true"
+          [quantity]="p.quantity"
+          [showQuantity]="isAdminOrManager"
+          (addedToCart)="openCartPreview()">
+        </app-product-card>
+      </div>
+      <div *ngIf="filteredProductsWithOffer.length === 0">
+        <span class="no-products-found">Nessun prodotto in Offerta trovato.</span>
+      </div>
+
+      <!-- Sezione altri prodotti -->
+      <h2 class="section-title">{{ sectionTitle }}</h2>
+      <div class="cards-container" *ngIf="filteredProductsWithoutOffer.length > 0">
+        <app-product-card 
+          *ngFor="let p of filteredProductsWithoutOffer"
+          [product]="p"
+          [showAddToCart]="isCustomer"
+          [showPrice]="true"
+          [quantity]="p.quantity"
+          [showQuantity]="isAdminOrManager"
+          (addedToCart)="openCartPreview()">
+        </app-product-card>
+      </div>
+      <div *ngIf="!allProductsHaveOffer && filteredProductsWithoutOffer.length === 0">
+        <span class="no-products-found">Nessun prodotto trovato.</span>
+      </div>
+
+      <!-- Banner tutti in offerta -->
+      <div *ngIf="allProductsHaveOffer" class="all-offers-banner">
+        <mat-icon class="all-offers-icon">local_offer</mat-icon>
+        <span class="all-offers-text">
+          Tutti i prodotti di questo supermercato sono in offerta!
+        </span>
+      </div>
+    </mat-card>
+
+    <!-- FAB aggiungi prodotti -->
+
+    <button
+      *ngIf="isAdminOrManager"
+      mat-fab
+      color="primary"
+      class="fab-button add-products-fab"
+      #addProductsFabTooltip="matTooltip"
+      matTooltip="Gestisci Prodotti"
+      matTooltipPosition="left"
+      (click)="closeFabTooltip(addProductsFabTooltip); addProductsFromDatabase()"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+
+    <!-- FAB genera offerte -->
+    <button
+      *ngIf="isAdminOrManager"
+      mat-fab
+      color="accent"
+      class="fab-button generate-offers-fab"
+      #generateOffersFabTooltip="matTooltip"
+      matTooltip="Genera offerte casuali"
+      matTooltipPosition="left"
+      (click)="closeFabTooltip(generateOffersFabTooltip); generaRandomOffer()"
+    >
+      <mat-icon>casino</mat-icon>
+    </button>
+
+    
+  </div>
+
+</ion-content>

@@ -1,0 +1,68 @@
+<ion-content>
+  <div class="auth-page">
+
+    
+    <div class="auth-container">
+      <img src="assets/logo.png" alt="Logo St3pnyMarket" class="logo"/>
+      <h1 class="title">Registrati</h1>
+      
+
+      <div *ngIf="errorMessage" class="auth-error">{{ errorMessage }}</div>
+
+      <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+        <ion-item lines="full" class="custom-floating-item">
+          <label class="custom-floating-label" [class.floating]="focused.username || username.length > 0" for="usernameInput">Username</label>
+          <ion-input id="usernameInput" name="username" type="text" required [(ngModel)]="username" (ionFocus)="focused.username = true" (ionBlur)="focused.username = false"></ion-input>
+        </ion-item>
+
+        <ion-item lines="full" class="custom-floating-item">
+          <label class="custom-floating-label" [class.floating]="focused.email || email.length > 0" for="emailInput">Email</label>
+          <ion-input id="emailInput" name="email" type="email" required [(ngModel)]="email" (ionFocus)="focused.email = true" (ionBlur)="focused.email = false"></ion-input>
+        </ion-item>
+
+        <ion-item lines="full" class="custom-floating-item">
+          <label class="custom-floating-label" [class.floating]="focused.password || password.length > 0" for="passwordInput">Password</label>
+          <ion-input id="passwordInput" name="password" [type]="showPassword ? 'text' : 'password'" required [(ngModel)]="password" (ionFocus)="focused.password = true" (ionBlur)="focused.password = false"></ion-input>
+          <ion-icon 
+            [name]="showPassword ? 'eye-off' : 'eye'" 
+            slot="end" 
+            (click)="togglePassword()"
+            class="password-toggle"
+          ></ion-icon>
+        </ion-item>
+
+        <ion-item lines="full" class="custom-floating-item">
+          <label class="custom-floating-label" [class.floating]="focused.confirmPassword || confirmPassword.length > 0" for="confirmPasswordInput">Conferma Password</label>
+          <ion-input id="confirmPasswordInput" name="confirmPassword" [type]="showConfirmPassword ? 'text' : 'password'" required [(ngModel)]="confirmPassword" (ionFocus)="focused.confirmPassword = true" (ionBlur)="focused.confirmPassword = false"></ion-input>
+          <ion-icon 
+            [name]="showConfirmPassword ? 'eye-off' : 'eye'" 
+            slot="end" 
+            (click)="toggleConfirmPassword()"
+            class="password-toggle"
+          ></ion-icon>
+        </ion-item>
+
+        <ion-item lines="full" class="custom-floating-item">
+          <label class="custom-floating-label" [class.floating]="focused.role || role" for="roleInput">Ruolo</label>
+          <select id="roleInput" name="role" [(ngModel)]="role" (focus)="focused.role = true" (blur)="focused.role = false" required class="native-select">
+            <option value="customer">Cliente</option>
+            <option value="manager">Manager</option>
+          </select>
+        </ion-item>
+
+        <ion-button
+        expand="block"
+        shape="round"
+        color="primary"
+        type="submit" [disabled]="!registerForm.valid">
+          Registrati
+        </ion-button>
+      </form>
+
+      <div class="auth-link">
+        <span>Hai già un account?</span><a routerLink="/auth/login">Accedi</a>
+      </div>
+    </div>
+
+  </div>
+</ion-content>

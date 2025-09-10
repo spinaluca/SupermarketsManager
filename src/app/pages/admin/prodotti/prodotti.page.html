@@ -1,0 +1,46 @@
+<app-header [pageTitle]="'Prodotti'" [showBack]="true" [backUrl]="'/dashboard'"></app-header>
+
+<ion-content class="page-container">
+
+    <!-- Griglia prodotti -->
+    <div *ngIf="products.length > 0" class="products-container">
+      <div class="products-header">
+        <h2 class="products-title">I tuoi prodotti</h2>
+        <span class="products-count">{{ products.length }} prodott{{ products.length === 1 ? 'o' : 'i' }}</span>
+      </div>
+      
+      <div class="products-grid">
+        <app-product-card 
+          *ngFor="let product of products" 
+          [product]="product"
+          [showAddToCart]="false"
+          [showPrice]="false"
+          [showQuantity]="true"
+          [quantity]="product.quantity">
+        </app-product-card>
+      </div>
+    </div>
+
+    <!-- Quando non c'è nessun prodotto -->
+    <div class="flex">
+      <div *ngIf="products.length === 0" class="empty-state">
+        <div class="empty-icon">
+          <mat-icon>inventory_2</mat-icon>
+        </div>
+        <h3 class="empty-title">Nessun prodotto trovato</h3>
+      </div>
+    </div>
+
+  <!-- Bottone per aggiungere prodotti-->
+  <button 
+    mat-fab
+    class="fab-button" 
+    #addProductFabTooltip="matTooltip"
+    matTooltip="Aggiungi prodotto"
+    matTooltipPosition="left"
+    (click)="closeFabTooltip(addProductFabTooltip); apriProductDialog()"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
+
+</ion-content>

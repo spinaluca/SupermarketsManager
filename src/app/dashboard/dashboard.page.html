@@ -1,0 +1,14 @@
+<app-header
+ [pageTitle]="'Dashboard'"
+>
+</app-header>
+
+<ion-content>
+
+  <!-- Dashboard specifiche in base al ruolo -->
+  <app-dashboard-admin *ngIf="ruolo === 'admin'" [stats]="stats"></app-dashboard-admin>
+  <app-dashboard-manager *ngIf="ruolo === 'manager'"></app-dashboard-manager>
+  <app-dashboard-customer *ngIf="ruolo === 'customer'"></app-dashboard-customer>
+
+  
+</ion-content>

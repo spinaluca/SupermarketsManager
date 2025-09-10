@@ -1,0 +1,133 @@
+.carrello-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding-bottom: 4rem;
+
+  .supermarket-title, h2 {
+    color: white;
+    font-size: 1.8rem;
+    background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+    color: white;
+    border-radius: 16px;
+    padding: 1.2rem 1.5rem;
+    margin: 0;
+    text-align: center;
+  }
+
+  .supermarket-title {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  p { // carrello vuoto
+    text-align: center;
+    color: white;
+    font-size: 1.1rem;
+    padding: 2rem;
+    background: rgba(255,255,255,0.15);
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+}
+
+
+.supermarket-group {
+  background: rgba(255,255,255,0.95);
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.2);
+  overflow: hidden;
+  position: relative;
+  border: none;
+}
+
+
+
+ion-item {
+  ion-label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #182848;
+    flex: 1;
+  }
+  .qty-btn, .remove-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    background: #e3eafc;
+    margin: 0 2px;
+    transition: background 0.2s;
+  }
+
+  .qty-btn { color: #4b6cb7; }
+  .remove-btn { color: #ef5350; font-size: 18px; background: #ffeaea; }
+  .remove-btn:hover { background: #ffc1c1; }
+
+  
+  .quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 16px;
+  }
+  ion-badge {
+    --background: #4b6cb7;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 6px 10px;
+    border-radius: 6px;
+    min-width: 28px;
+    text-align: center;
+  }
+  ion-note {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #4b6cb7;
+    margin: 0 0.75rem;
+    min-width: 4rem;
+    text-align: right;
+  }
+}
+
+.group-total {
+  background: white;
+  padding: 1.2rem 1.5rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #182848;
+  text-align: right;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checkout-btn {
+  font-size: 1.15rem;
+  font-weight: 600;
+  height: 48px;
+  margin: 1rem;
+  max-width: 200px;
+  transition: all 0.3s ease;
+  &:hover { transform: translateY(-2px); }
+}
+
+@media (max-width: 768px) {
+  h2 { font-size: 1.5rem; margin-bottom: 1rem; }
+  .supermarket-title { font-size: 1.2rem; padding: 1rem 1.5rem; }
+  ion-item {
+    font-size: 1rem;
+    ion-label { font-size: 1rem; }
+    ion-note { font-size: 1rem; }
+  }
+}
+

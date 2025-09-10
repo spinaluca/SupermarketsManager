@@ -1,0 +1,65 @@
+.content-wrapper {
+  padding: 20px;
+  min-height: calc(100vh - 64px);
+  position: relative;
+}
+
+.empty-message {
+  text-align: center;
+  padding: 24px 16px;
+  color: #4b6cb7;
+  background: rgba(255,255,255,0.95);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(76, 108, 183, 0.10);
+  font-size: 1.15rem;
+  font-weight: 500;
+  margin-top: 2rem;
+}
+
+.users-list {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.95);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(76, 108, 183, 0.10);
+  padding: 16px;
+
+  mat-list-item {
+    min-height: 72px;
+    margin: 8px 0;
+    border-radius: 8px;
+    transition: box-shadow 0.2s, transform 0.2s, background-color 0.2s;
+    box-shadow: 0 1px 4px rgba(76, 108, 183, 0.06);
+    &:hover {
+      background-color: #eaf1fb;
+      box-shadow: 0 4px 16px rgba(76, 108, 183, 0.13);
+      transform: translateY(-2px);
+    }
+    &:not(:last-child) {
+      border-bottom: 1px solid #e0e6f7;
+    }
+  }
+
+  [matListItemTitle] {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #4b6cb7;
+  }
+
+  [matListItemLine] {
+    font-size: 0.98rem;
+    color: #182848;
+    opacity: 0.85;
+  }
+
+  mat-icon {
+    margin-right: 16px;
+    color: #67a0e3;
+    font-size: 28px;
+  }
+}
+
+.empty-state{
+  width: 800px;
+}

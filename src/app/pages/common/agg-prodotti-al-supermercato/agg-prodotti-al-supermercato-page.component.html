@@ -1,0 +1,43 @@
+<app-header [pageTitle]="'Aggiungi Prodotti'" [showBack]="true" [backUrl]="'/supermercato/' + supermarketId"></app-header>
+
+<ion-content>
+
+  <!-- Griglia prodotti -->
+  <div class="products-container" *ngIf="products.length > 0; else emptyState">
+    <mat-card class="product-card" *ngFor="let p of products">
+      <mat-card-title>
+        <span class="titolo">{{ p.name }}</span>
+        <span *ngIf="p.isAssigned && p.hasOffer" class="offer-badge">In offerta</span>
+        <span *ngIf="p.isAssigned; else notAssigned" class="assigned-badge">Assegnato</span>
+        <ng-template #notAssigned>
+          <span class="not-assigned-badge">Non assegnato</span>
+        </ng-template>
+      </mat-card-title>
+      <mat-card-content>
+        <div class="card-content">
+          <mat-form-field appearance="fill" class="qty-field">
+            <mat-label>Quantità</mat-label>
+            <input #qtyInput matInput type="number" min="1" step="1" [value]=""/>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="price-field">
+            <mat-label>Prezzo (€)</mat-label>
+            <input #priceInput matInput type="number" min="0.01" step="0.01" [value]=""/>
+          </mat-form-field>
+          <button mat-raised-button color="primary" (click)="addProduct(p, qtyInput.value, priceInput.value)">Aggiungi</button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Quando non c'è nessun prodotto -->
+  <ng-template #emptyState>
+    <div class="flex">
+      <div class="empty-state">
+        <div class="empty-icon">
+          <mat-icon>inventory_2</mat-icon>
+        </div>
+        <h3 class="empty-title">Nessun supermercato trovato</h3>
+      </div>
+    </div>
+  </ng-template>
+</ion-content> 

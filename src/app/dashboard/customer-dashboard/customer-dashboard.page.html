@@ -1,0 +1,56 @@
+<ion-content>
+  <div class="dashboard-customer-wrapper">
+
+    <ion-grid class="dashboard-grid">
+
+      <ion-row>
+
+
+
+        <!-- Blocco lista-supermercati -->
+        <ion-col>
+          <div class="dashboard-block">
+            <h2 class="section-title">Supermercati consigliati</h2>
+              <app-lista-supermercati [isEmbedded]="true" [isCustomerDash]="true"></app-lista-supermercati>
+          </div>
+        </ion-col>
+
+
+        <!-- Blocco offerte -->
+        <ion-col >
+          <div class="dashboard-block">
+            <h2 class="section-title">Offerte attive</h2>
+            <div class="cards-container cards-scroll">
+              <app-product-card
+                *ngFor="let offer of products"
+                [hidden]="!offer.quantity"
+                [offer]="offer"
+                [showSupermarketName]="true"
+                [quantity]="offer.quantity"
+                (addedToCart)="openCartPreview()"
+              ></app-product-card>
+            </div>
+
+            <!-- Nessuna offerta -->
+            <div class="flex">
+              <div *ngIf="noOffers" class="empty-state">
+                <div class="empty-icon">
+                  <mat-icon>sell</mat-icon>
+                </div>
+                <h3 class="empty-title">Nessun offerta disponibile al momento.</h3>
+              </div>
+            </div>
+
+
+          </div>
+        </ion-col>
+
+
+      </ion-row>
+
+    </ion-grid>
+  </div>
+
+  <app-cart-preview *ngIf="showCartPreview" (close)="closeCartPreview()"></app-cart-preview>
+
+</ion-content>

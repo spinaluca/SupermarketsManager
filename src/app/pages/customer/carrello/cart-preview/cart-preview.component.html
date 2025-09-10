@@ -1,0 +1,45 @@
+<div class="cart-preview-overlay" (click)="close.emit()"></div>
+
+<div class="cart-preview-sidebar">
+  
+  <section class="carrello-container ">
+
+    <button mat-icon-button class="close-preview-btn" (click)="close.emit()">
+      <mat-icon>close</mat-icon>
+    </button>
+
+
+    <h2>Anteprima Carrello</h2>
+
+    <div class="cart-preview-scrollable">
+      <ng-container *ngIf="groupedCart as groups">
+        <p *ngIf="!groups.length">Il carrello è vuoto.</p>
+        <div *ngFor="let group of groups" class="supermarket-group">
+          <h3 class="supermarket-title">{{ group.supermarketName }}</h3>
+          <ion-list>
+            <ion-item *ngFor="let item of group.items">
+              <ion-label>{{ item.name }}</ion-label>
+              <div class="controls-row-scroll">
+                <div class="flex">
+                  <div class="quantity-controls">
+                    <span class="qty-btn" (click)="decreaseItem(item)">-</span>
+                    <ion-badge color="primary">{{ item.quantity }}</ion-badge>
+                    <span class="qty-btn" (click)="increaseItem(item)">+</span>
+                  </div>
+                  <ion-badge color="medium" class="price-badge">{{ (item.price * item.quantity) | currency:'EUR':'symbol' }}</ion-badge>
+                  <span class="remove-btn" (click)="removeProduct(item)">&times;</span>
+                </div>
+              </div>
+            </ion-item>
+          </ion-list>
+          <ion-badge slot="end" color="medium" class="flex totale">Totale: {{ group.total | currency:'EUR':'symbol' }}</ion-badge>
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="cart-preview-footer">
+      <button mat-stroked-button color="primary" class="go-to-cart-btn" (click)="goToCart()">Vai al carrello</button>
+    </div>
+
+  </section>
+</div> 

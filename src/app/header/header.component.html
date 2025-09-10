@@ -1,0 +1,82 @@
+<mat-toolbar class="main-header">
+
+
+  <!-- Tasto per andare indietro che compare in maniera dinamica-->
+   <button *ngIf="showBack" mat-icon-button class="back-btn" (click)="goBack()">
+     <mat-icon>arrow_back</mat-icon>
+   </button>
+
+   <img src="assets/logo.png" alt="Logo" class="header-logo clickable-logo" (click)="goToDashboard()"/>
+
+   <span class="app-title">St3pnyMarket<span *ngIf="pageTitle"> - {{ pageTitle }}</span></span>
+
+   <span class="spacer"></span>
+
+
+   <!-- Bottoni nell'Header -->
+   <div class="header-actions">
+
+
+    <!-- Menu -->
+     <button mat-icon-button #menuTrigger="matMenuTrigger"
+     [matMenuTriggerFor]="mainMenu"
+     (mouseenter)="menuTrigger.openMenu()"
+     class="menu-btn">
+       <mat-icon>menu</mat-icon>
+     </button>
+
+     <!-- Logout -->
+     <button mat-icon-button class="logout-btn" (click)="logout()">
+       <mat-icon>logout</mat-icon>
+     </button>
+
+
+   </div>
+   
+</mat-toolbar>
+
+<!-- Elementi del menu -->
+<mat-menu #mainMenu="matMenu">
+  <div *ngIf="userName || userRole" class="user-info">
+    <p class="user">{{ userName }}</p>
+    <p class="ruolo">Ruolo: {{ userRole }}</p>
+  </div>
+
+  <div class="containerMenu">
+
+    <button mat-menu-item (click)="goToDashboard()">
+      <mat-icon>dashboard</mat-icon>
+      <span>Dashboard</span>
+    </button>
+
+    <!-- Customer -->
+    <button *ngIf="isCustomer" mat-menu-item (click)="goToCarrello()">
+      <mat-icon>shopping_cart</mat-icon>
+      <span>Carrello</span>
+    </button>
+    <button *ngIf="isCustomer" mat-menu-item (click)="goToStoricoAcquisti()">
+      <mat-icon>receipt_long</mat-icon>
+      <span>Storico acquisti</span>
+    </button>
+
+    <!-- Admin -->
+    <button *ngIf="isAdmin" mat-menu-item (click)="goToSupermercati()">
+      <mat-icon>store</mat-icon>
+      <span>Supermercati</span>
+    </button>
+    <button *ngIf="isAdmin" mat-menu-item (click)="goToAdminProdotti()">
+      <mat-icon>inventory_2</mat-icon>
+      <span>Prodotti</span>
+    </button>
+    <button *ngIf="isAdmin" mat-menu-item (click)="goToAdminUtenti()">
+      <mat-icon>groups</mat-icon>
+      <span>Utenti</span>
+    </button>
+    <button *ngIf="isAdmin" mat-menu-item (click)="goToNotFound()">
+      <mat-icon>report_problem</mat-icon>
+      <span>Pagina 404</span>
+    </button>
+
+  </div>
+
+</mat-menu>

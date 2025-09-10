@@ -1,0 +1,16 @@
+<div class="supermarket-list-item" (click)="emitClick()" [ngClass]="{'big': big}">
+  <div class="supermarket-info-row">
+    <mat-icon class="sm-list-icon">storefront</mat-icon>
+    <div>
+      <div class="sm-title">{{ supermarket.name }}</div>
+      <div class="sm-address">{{ supermarket.address }}</div>
+    </div>
+  </div>
+  <div class="sm-coords">
+    <mat-icon class="coords-icon">explore</mat-icon>
+    <span>Lat: <strong>{{ supermarket.latitude }}</strong> - Lon: <strong>{{ supermarket.longitude }}</strong></span>
+  </div>
+  <div class="mini-map-wrapper" (click)="$event.stopPropagation()">
+    <app-mini-map [latitude]="supermarket.latitude" [longitude]="supermarket.longitude"></app-mini-map>
+  </div>
+</div> 
